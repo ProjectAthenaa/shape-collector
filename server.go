@@ -16,15 +16,15 @@ func main() {
 	app.Use(recover.New())
 
 	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendFile("/index.html")
+		return c.SendFile("index.html")
 	})
 
 	app.Get("/base.js", func(c *fiber.Ctx) error {
-		return c.SendFile("/base.js")
+		return c.SendFile("base.js")
 	})
 
 	app.Get("/dynamic.js", func(c *fiber.Ctx) error {
-		return c.SendFile("/dynamic.js")
+		return c.SendFile("dynamic.js")
 	})
 
 	app.Post("/data", func(ctx *fiber.Ctx) error {
