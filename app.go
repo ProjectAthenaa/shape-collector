@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"flag"
+	"github.com/ProjectAthenaa/sonic-core/sonic"
 	"github.com/ProjectAthenaa/sonic-core/sonic/core"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
@@ -23,11 +24,14 @@ func main() {
 		Prefork: *prod, // go run app.go -prod
 	})
 
+
+
 	// Middleware
 	app.Use(recover.New())
 	app.Use(logger.New())
 
 	app.Post("/data", func(ctx *fiber.Ctx) error {
+		_, _ = core.Base.GetPg("cache").Device.Create().SetAdevice(sonic.Map{"data": string(ctx.Body())}).Save(ctx.UserContext())
 		core.Base.GetRedis("cache").SAdd(context.Background(), "shape:newbalance:collector", string(ctx.Body()))
 		return ctx.JSON(fiber.Map{"success": true})
 	})
