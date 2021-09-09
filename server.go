@@ -18,7 +18,7 @@ func main() {
 		return ctx.JSON(fiber.Map{"success": true})
 	})
 
-	//var a=new XMLHttpRequest;a.open("POST","https://www.newbalance.com/on/demandware.store/Sites-NBUS-Site/en_US/Cart-AddProduct",!0),a.send(),console.log(JSON.stringify(tagobj));
+	//var a=new XMLHttpRequest;a.open("POST","/submit",!0),a.send();setTimeout(()=>{console.log(JSON.stringify(tagobj))},500);
 	app.Post("/submit", func(c *fiber.Ctx) error {
 		return c.SendString("nice job")
 	})
