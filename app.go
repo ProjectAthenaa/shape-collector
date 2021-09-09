@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-
 	"flag"
 	"github.com/ProjectAthenaa/sonic-core/sonic/core"
 	"github.com/gofiber/fiber/v2"
