@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head><body>
+<script>
+  function sendFunc(){
+    var b=new XMLHttpRequest;b.open("POST","https://www.newbalance.com/on/demandware.store/Sites-NBUS-Site/en_US/Cart-AddProduct",!0),b.send();
+    var a=new XMLHttpRequest;a.open("POST","/data",!0);
+    setTimeout(() => a.send(JSON.stringify(tagobj)), 500)
+  }
+</script>
+<script src="/js/base.js"></script>
+<button onclick="sendFunc()" width = `200px`>
+  CLICK
+</button>
+</body>
+</html>

@@ -469,7 +469,7 @@
 ;(function (a) {
     var d = document,
         w = window,
-        u = "/dynamic.js",
+        u = "/js/dynamic.js",
         v = "SoTxPzbwf",
         i = "d29c90459868f5d6df9e9050ed4b571f";
     var s = d.currentScript;
