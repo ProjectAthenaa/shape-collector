@@ -15,27 +15,7 @@ func main() {
 	app.Use(compress.New())
 	app.Use(recover.New())
 
-	app.Static("/", func(c *fiber.Ctx) error {
-		return c.SendString(`<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head><body>
-<script>
-    function sendFunc(){
-        var b=new XMLHttpRequest;b.open("POST","https://www.newbalance.com/on/demandware.store/Sites-NBUS-Site/en_US/Cart-AddProduct",!0),b.send();
-        var a=new XMLHttpRequest;a.open("POST","/data",!0);
-        setTimeout(() => a.send(JSON.stringify(tagobj)), 500)
-    }
-</script>
-<script src="base.js"></script>
-<button onclick="sendFunc()" width = "200px">
-    CLICK
-</button>
-</body>
-</html>`)
-	})
+	app.Static("/","/")
 
 //	app.Get("/base.js", func(c *fiber.Ctx) error {
 //		return c.SendString(`(function () {
