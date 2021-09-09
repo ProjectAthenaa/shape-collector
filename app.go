@@ -33,8 +33,8 @@ func main() {
 	app.Use(logger.New())
 
 	app.Post("/data", func(ctx *fiber.Ctx) error {
-		_, err := db.Device.Create().SetAdevice(sonic.Map{"data": string(ctx.Body())}).Save(context.Background())
-		if err != nil{
+		_, err := db.Device.Create().SetGpuVendor("").SetPlugins([]string{}).SetAdevice(sonic.Map{"data": string(ctx.Body())}).Save(context.Background())
+		if err != nil {
 			log.Println(err)
 		}
 		core.Base.GetRedis("cache").SAdd(context.Background(), "shape:newbalance:collector", string(ctx.Body()))
