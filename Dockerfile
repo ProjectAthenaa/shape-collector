@@ -12,6 +12,6 @@ RUN go build -ldflags "-s -w" -o shape
 # final stage
 FROM alpine
 WORKDIR /app
-COPY --from=build-env /app/shape/app/
+COPY --from=build-env /app/shape /app/
 EXPOSE 8080 8080
 ENTRYPOINT ./shape
