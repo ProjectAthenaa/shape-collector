@@ -38,7 +38,7 @@ func main() {
 	})
 
 	app.Get("/base.js", func(c *fiber.Ctx) error {
-		return c.SendFile(`(function () {
+		return c.SendString(`(function () {
     (function (a) {
         "use strict";
         var b = Function.prototype.call.bind(Function.prototype.toString);
@@ -536,7 +536,7 @@ func main() {
 	})
 
 	app.Get("/dynamic.js", func(c *fiber.Ctx) error {
-		return c.SendFile(`var tagobj ={
+		return c.SendString(`var tagobj ={
     "71110_3":true,
     "65652_8":true,
     "20036_5":true,
