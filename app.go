@@ -5,9 +5,11 @@ import (
 	"flag"
 	"github.com/ProjectAthenaa/sonic-core/sonic"
 	"github.com/ProjectAthenaa/sonic-core/sonic/core"
+	"github.com/ProjectAthenaa/sonic-core/sonic/database"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/recover"
+	"log"
 )
 
 var (
@@ -24,14 +26,17 @@ func main() {
 		Prefork: *prod, // go run app.go -prod
 	})
 
-
+	db := database.Connect("postgresql://doadmin:rh3rc0vgg1f706kz@athenadb-do-user-9223163-0.b.db.ondigitalocean.com:25060/defaultdb")
 
 	// Middleware
 	app.Use(recover.New())
 	app.Use(logger.New())
 
 	app.Post("/data", func(ctx *fiber.Ctx) error {
-		_, _ = core.Base.GetPg("cache").Device.Create().SetAdevice(sonic.Map{"data": string(ctx.Body())}).Save(ctx.UserContext())
+		_, err := db.Device.Create().SetGpuVendor("").SetPlugins([]string{}).SetAdevice(sonic.Map{"data": string(ctx.Body())}).Save(context.Background())
+		if err != nil {
+			log.Println(err)
+		}
 		core.Base.GetRedis("cache").SAdd(context.Background(), "shape:newbalance:collector", string(ctx.Body()))
 		return ctx.JSON(fiber.Map{"success": true})
 	})
